@@ -395,7 +395,7 @@ footer i{
 .endlines p{
   display: inline;
 }
-.endlines button{
+.endlines form button{
   position: absolute;
   bottom: 200px;
 }
