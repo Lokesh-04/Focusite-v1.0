@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,9 +8,53 @@
     <title>Notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <link rel="stylesheet" href="home.css">
+    <style>
+        /* Container styling */
+        .tile-container {
+            margin-top: 80px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            justify-content: center;
+        }
+
+        /* Individual tile styling */
+        .tile {
+            background-color: #1f1f1f;
+            padding: 15px 20px;
+            width: 200px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            word-wrap: break-word;
+            position: relative;
+            transition: transform 0.2s;
+        }
+
+        /* Hover effect for tiles */
+        .tile:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Content styling */
+        .tile p {
+            margin: 0;
+            font-size: 16px;
+            color: white;
+        }
+
+        /* Message styling when no notes are found */
+        #no-notes-message {
+            text-align: center;
+            font-size: 18px;
+            color: #777;
+            margin-top: 50px;
+        }
+    </style>
 </head>
+
 <body>
-    
+
     <div class="nav" id="nav">
         <button id="home">
             <h2>Focusite</h2>
@@ -17,38 +62,16 @@
         <ul id="u_list">
             <li><a class="list" href="home.html">Home</a></li>
             <li><a class="list active" href="notes.html">Notes</a></li>
-            <li><a class="list" href="https://github.com/Lokesh-04/Focusite-v1.0"><i class="fa-brands fa-github"></i></a></li>
+            <li><a class="list" href="https://github.com/Lokesh-04/Focusite-v1.0"><i
+                        class="fa-brands fa-github"></i></a></li>
         </ul>
     </div>
 
-<!-- notes section -->
-<div class="notes">
-    <div class="plus_note">
-        <button id="plus" class="plus">+</button>
-    </div>
-
-    <div class="notes-div" id="notes-div">
-        <div class="notes-header">
-            <div class="name">
-                <p id="co">FOCUSITE</p>
-                <p id="head">Notes</p>
-            </div>
-            <div class="notes-nav">
-                <i id="arrow" onclick="notesopen()" class="fa-solid fa-up-right-from-square"></i>
-                <i id="x-mark" onclick="noteshide()" class="fa-solid fa-xmark"></i>
-            </div>
-        </div>
-        <div id="notes-main">
-            <!-- <button class="add-note" type="button">+</button> -->
-            <button class="addnote" id="add-note"><i id="sharp-plus" class="fa-sharp fa-solid fa-plus"></i>Take a note...</button>
-
-
-            <div id="foot"></div>
-        </div>
-
-    </div>
-</div>
+    <!-- notes section -->
+    <div id="tile-container" class="tile-container"></div>
 
     <script src="home.js"></script>
+    <script src="notes.js"></script>
 </body>
+
 </html>
