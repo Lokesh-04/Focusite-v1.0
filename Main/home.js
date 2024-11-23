@@ -6,7 +6,7 @@ home.addEventListener('click',()=>{
 
 // music player js
 let song=document.getElementById("song")
-let arr=["audio1.mp3","audio2.mp3","audio3.mp3","audio4.mp3","audio5.mp3"]
+let arr=["audio1.mp3","audio2.mp3","audio3.mp3","audio4.mp3","audio5.mp3", "audio6.mp3"]
 let length = arr.length
 let i=0
 function play(){        
