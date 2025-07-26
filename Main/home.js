@@ -5,53 +5,72 @@ home.addEventListener('click',()=>{
 })
 
 // music player js
-let song=document.getElementById("song")
-let arr=["audio1.mp3","audio2.mp3","audio3.mp3","audio4.mp3","audio5.mp3", "audio6.mp3"]
-let length = arr.length
-let i=0
-function play(){        
-if ( document.getElementById("m_text").innerHTML == "play"){        
-document.getElementById("play").setAttribute("class","fa-solid fa-circle-play")     
-song.pause()        
-document.getElementById("m_text").innerHTML = "pause"    
-   }    
-else{  document.getElementById("play").setAttribute("class","fa-solid fa-circle-pause")    
-song.play()  
-document.getElementById("m_text").innerHTML = "play" 
+let song = document.getElementById("song");
+let arr = ["audio1.mp3", "audio2.mp3", "audio3.mp3", "audio4.mp3", "audio5.mp3", "audio6.mp3"];
+let currentSongIndex = 0; // Renamed 'i' to 'currentSongIndex' for better readability
+
+// --- Helper function to update the UI (play/pause icon and text) ---
+function updatePlayButtonUI(isPlaying) {
+    const playButton = document.getElementById("play");
+    const mText = document.getElementById("m_text");
+
+    if (isPlaying) {
+        playButton.setAttribute("class", "fa-solid fa-circle-pause");
+        mText.innerHTML = "pause";
+    } else {
+        playButton.setAttribute("class", "fa-solid fa-circle-play");
+        mText.innerHTML = "play";
+    }
+}
+
+// --- Play/Pause Toggle Function ---
+function playPauseToggle() {
+    // Check if the song is currently paused (or not playing)
+    if (song.paused) {
+        song.play();
+        updatePlayButtonUI(true); // Update UI to show "pause" icon/text
+    } else {
+        song.pause();
+        updatePlayButtonUI(false); // Update UI to show "play" icon/text
+    }
+}
+
+// --- Function to play a specific song by index ---
+function playSong(index) {
+    // Ensure the index wraps around correctly
+    if (index >= arr.length) {
+        currentSongIndex = 0; // Loop back to the first song
+    } else if (index < 0) {
+        currentSongIndex = arr.length - 1; // Loop to the last song
+    } else {
+        currentSongIndex = index;
+    }
+
+    song.setAttribute("src", arr[currentSongIndex]);
+    song.play();
+    updatePlayButtonUI(true); // Always set to playing state when a new song starts
+}
+
+// --- Event listener for when the current song ends ---
 song.onended = function() {
-    if ( i == arr.length-1 ){
-        i = -1;
-    }
-    else{
-        next()
-    }
-  };  
-// make functions and then call functions 
+    playSong(currentSongIndex + 1); // Play the next song in the array
+};
+
+// --- Next Song Function ---
+function next() {
+    playSong(currentSongIndex + 1);
 }
+
+// --- Previous Song Function ---
+function prev() {
+    playSong(currentSongIndex - 1);
 }
-function next(){
-  if(document.getElementById("m_text").innerHTML == "pause"){
-    document.getElementById("play").setAttribute("class","fa-solid fa-circle-pause")
-  }
-if ( i == arr.length-1 ){
-    i = -1
-}
-else{
-    i=i+1
-document.getElementById("song").setAttribute("src",arr[i])    
-song=document.getElementById("song")    
-song.play()
-}
-}
-function prev(){    
-i=i-1
-if(document.getElementById("m_text").innerHTML == "pause"){
-  document.getElementById("play").setAttribute("class","fa-solid fa-circle-pause")
-}
-document.getElementById("song").setAttribute("src",arr[i])    
-song=document.getElementById("song")    
-song.play()
-}
+
+// --- Initial setup (optional, but good practice) ---
+// Set the initial song when the page loads
+song.setAttribute("src", arr[currentSongIndex]);
+// You might want to initially set the play button to "play" if the song isn't playing
+updatePlayButtonUI(false); // Song is initially paused
 
 
 
